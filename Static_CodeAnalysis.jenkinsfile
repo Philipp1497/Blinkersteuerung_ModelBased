@@ -1,36 +1,17 @@
 pipeline {
     agent any
     stages {
-		stage ('Clear bin directory') {
+		stage ('copy artifacts') {
+            steps{
+                copyArtifacts(projectName: 'CI'
+							  target: "Target");
+            }
+        }
+		stage ('run memory analysis') {
             steps{
                 bat """
-                    del /q Target\\bin\\*.* 2>NUL
+                    cd Tools\\memory
                 """
-            }
-        }
-        stage ('Build') {
-            steps{
-                bat "Tools\\make\\start.bat"
-            }
-        }
-        stage ('archive Artifacts'){
-            steps{
-                archiveArtifacts artifacts: 'Target\\bin\\*.*', onlyIfSuccessful: true
-            }
-        }
-        stage ('run static code analysis'){
-            steps{
-                bat """
-                    xcopy "Source\\src\\*.*" "Tools\\splint" /y
-                    cd Tools\\splint
-					del log.txt 2>NUL
-                    start.bat
-                """
-            }
-        }
-        stage ('archive LogFile'){
-            steps{
-                archiveArtifacts artifacts: 'Tools\\splint\\log.txt', onlyIfSuccessful: true
             }
         }
     }
