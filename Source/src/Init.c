@@ -7,14 +7,19 @@
 
 #define     BLINK_TIME  50000      // time in us
 
+#ifdef CEEDLING
+cregister volatile unsigned int IFR;
+cregister volatile unsigned int IER;
+#endif
 
 void Blinkersteuerung_initialize()
 {
            // Step 1. Initialize System Control:
            // PLL, WatchDog, enable Peripheral Clocks
            // This example function is found in the DSP280x_SysCtrl.c file.
-              InitSysCtrl();
-
+              #ifndef CEEDLING
+			  InitSysCtrl();
+			  #endif
            // Step 2. Initalize GPIO:
            // This example function is found in the DSP280x_Gpio.c file and
            // illustrates how to set the GPIO to it's default state.
@@ -30,7 +35,6 @@ void Blinkersteuerung_initialize()
            // are cleared.
            // This function is found in the DSP280x_PieCtrl.c file.
               InitPieCtrl();
-
            // Disable CPU interrupts and clear all CPU interrupt flags:
               IER = 0x0000;
               IFR = 0x0000;
@@ -41,7 +45,9 @@ void Blinkersteuerung_initialize()
            // is not used in this example.  This is useful for debug purposes.
            // The shell ISR routines are found in DSP280x_DefaultIsr.c.
            // This function is found in DSP280x_PieVect.c.
-              InitPieVectTable();
+              #ifndef CEEDLING
+			  InitPieVectTable();
+			  #endif
 
            // Interrupts that are used in this example are re-mapped to
            // ISR functions found within this file.

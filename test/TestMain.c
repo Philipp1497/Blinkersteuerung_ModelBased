@@ -9,8 +9,12 @@
 //#include "Init.h"
 #include "Taster.h"
 #include "Timer.h"
-#include "Main.c"
+#include "ert_main.c"
+#include "Blinkersteuerung.h"
 #include "MockInit.h"
+
+
+static boolean_T OverrunFlag;
 
 void setUp(void)
 {
@@ -20,23 +24,15 @@ void tearDown(void)
 {
 }
 
-void testAppMain_when_zuendungIsActive(void)
+void test_rt_OneStep(void)
 {
-  zuendung_aktiv = 1;
-  init_Expect();
-  
-  AppMain();
+
+  rt_OneStep();
 }
 
-void testAppMain_when_zuendungIsNotActive(void)
+void test_Main(void)
 {
-  zuendung_aktiv = 0;
-  init_Expect();
+  Blinkersteuerung_initialize_Expect();
   
   AppMain();
-}
-
-void testGpioSelect(void)
-{
-  Gpio_select();
 }

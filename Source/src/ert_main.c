@@ -88,10 +88,13 @@ void rt_OneStep(void)
  * Attaching rt_OneStep to a real-time clock is target specific. This example
  * illustrates how you do this relative to initializing the model.
  */
-int_T main()
+ 
+ 
+ 
+ #ifndef CEEDLING
+int AppMain(void)
 {
-
-  /* Initialize model */
+   /* Initialize model */
   Blinkersteuerung_initialize();
 
   /* Attach rt_OneStep to a timer or interrupt service routine with
@@ -107,6 +110,29 @@ int_T main()
 
   return 0;
 }
+
+int main(void)
+{
+   return AppMain();
+}
+#else
+int AppMain(void)
+{
+/* Initialize model */
+  Blinkersteuerung_initialize();
+
+  /* Attach rt_OneStep to a timer or interrupt service routine with
+   * period 0.2 seconds (base rate of the model) here.
+   * The call syntax for rt_OneStep is
+   *
+   *  rt_OneStep();
+   */
+  rt_OneStep();
+
+  return 0;
+}
+#endif
+
 
 /*
  * File trailer for generated code.

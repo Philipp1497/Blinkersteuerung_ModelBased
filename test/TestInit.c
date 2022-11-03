@@ -14,6 +14,9 @@
 #include "DSP280x_Device.h"     // DSP280x Headerfile Include File
 #include "DSP280x_Examples.h"   // DSP280x Examples Include File
 #include "Init.h"
+#include "Timer.h"
+#include "Blinkersteuerung.h"
+#include "Taster.h"
 
 
 #define     BLINK_TIME  50000      // time in us
@@ -39,6 +42,6 @@ void testInit(void)
   ConfigCpuTimer_Expect(&CpuTimer0, 100, BLINK_TIME);
   StartCpuTimer0_Expect();*/
   
-  init();
+  Blinkersteuerung_initialize();
 }
 

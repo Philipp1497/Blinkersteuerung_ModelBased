@@ -9,6 +9,7 @@
 //#include "Init.h"
 #include "Taster.h"
 #include "Timer.h"
+#include "Blinkersteuerung.h"
 
 
 int flag;
