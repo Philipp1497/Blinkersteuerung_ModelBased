@@ -1,9 +1,8 @@
 #include "Taster.h"
 #include "Timer.h"
+#include "Blinkersteuerung.h"
 
 
-extern int counter;
-extern int blinkcounter;
 int flag = 0;
 
 int richtungs_blinken_flag = 0; // 1: rechts blinken  2: links blinken
@@ -13,6 +12,8 @@ int zuendung = 1;
 int warn_zustand = 1;
 int rechts_blink_zustand = 1;
 int links_blink_zustand = 1;
+
+extern int blink_counter;
 
 void zuendungstaster(void)
 {
@@ -51,7 +52,6 @@ void warntaster(void)
         warn_zustand = 2;
         if(flag == 0)
         {
-            counter = 0;
             flag = 1;
         }
         else
@@ -80,19 +80,18 @@ void rechtsblinken(void)
 {
     if(rechts_blink_zustand == 1 && GpioDataRegs.GPADAT.bit.GPIO22 == 0)   //Taster wird gedrueckt (steigende Flanke)
     {
+        blink_counter = 0;
         rechts_blink_zustand = 2;
         switch(richtungs_blinken_flag){
         case 0:
             richtungs_blinken_flag = 1;
+            rtDW.temporalCounter_i1 = 1;
             break;
         case 1:
-            counter = 1;
-            blinkcounter = 0;
             break;
         case 2:
-            counter = 1;
-            blinkcounter = 0;
             richtungs_blinken_flag = 1;
+            rtDW.temporalCounter_i1 = 1;
             break;
         }
 //        if(richtungs_blinken_flag == 0)
@@ -111,7 +110,6 @@ void rechtsblinken(void)
     else if (rechts_blink_zustand == 3 && GpioDataRegs.GPADAT.bit.GPIO22 == 1)   //Taster wird losgelassen (fallende Flanke)
     {
         rechts_blink_zustand = 4;
-        //richtungs_blinken_flag = 0;
     }
     else if (rechts_blink_zustand == 4 && GpioDataRegs.GPADAT.bit.GPIO22 == 1)   //Taster losgelassen
     {
@@ -124,19 +122,18 @@ void linksblinken(void)
 {
     if(links_blink_zustand == 1 && GpioDataRegs.GPADAT.bit.GPIO17 == 0)   //Taster wird gedrueckt (steigende Flanke)
     {
+        blink_counter = 0;
         links_blink_zustand = 2;
         switch(richtungs_blinken_flag){
         case 0:
             richtungs_blinken_flag = 2;
+            rtDW.temporalCounter_i1 = 1;
             break;
         case 1:
-            counter = 1;
-            blinkcounter = 0;
             richtungs_blinken_flag = 2;
+            rtDW.temporalCounter_i1 = 1;
             break;
         case 2:
-            counter = 1;
-            blinkcounter = 0;
             break;
         }
 //        if(richtungs_blinken_flag == 0)
