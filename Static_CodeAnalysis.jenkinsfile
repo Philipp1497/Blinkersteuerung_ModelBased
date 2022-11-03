@@ -20,7 +20,7 @@ pipeline {
 		stage ('archive artifacts in zip') {
 			steps{
 				bat """
-					zip -r Blinkersteuerung.zip.zip Target
+					zip -r Blinkersteuerung.zip Target
                 """
 				archiveArtifacts artifacts: 'Blinkersteuerung.zip', onlyIfSuccessful: true
 			}
