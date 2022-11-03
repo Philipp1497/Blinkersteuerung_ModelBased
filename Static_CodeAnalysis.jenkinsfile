@@ -17,6 +17,11 @@ pipeline {
 				archiveArtifacts artifacts: 'Tools\\memory\\output\\output.txt', onlyIfSuccessful: true
             }
         }
+		stage ('archive artifacts in zip') {
+			steps{
+				zip archive: true, dir: 'Target', zipfile: 'Blinkersteuerung.zip'
+			}
+		}
     }
     
 }
