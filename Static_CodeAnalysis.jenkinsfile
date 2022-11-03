@@ -10,8 +10,11 @@ pipeline {
 		stage ('run memory analysis') {
             steps{
                 bat """
+					xcopy "Target\\Target\\bin\\*.map" "Tools\\memory\\mapfiles"
                     cd Tools\\memory
+					%PYTHON% main.py
                 """
+				archiveArtifacts artifacts: 'Tools\\memory\\output\\output.txt', onlyIfSuccessful: true
             }
         }
     }
