@@ -4,7 +4,7 @@ pipeline {
 		stage ('copy artifacts') {
             steps{
                 copyArtifacts projectName: 'CI',
-				target: 'Target'
+				target: 'Target//copiedArtifacts'
             }
         }
 		stage ('run memory analysis') {
