@@ -54,7 +54,7 @@ void testZuendungstaster_State1TransitionTo2()
 	GpioDataRegs.GPADAT.bit.GPIO9 = 0;
 	zuendungstaster();
 	
-	TEST_ASSERT_EQUAL(2, zuendung);
+	TEST_ASSERT_EQUAL(20, zuendung);
 }
 
 void testZuendungstaster_State2TransitionTo3()
@@ -63,7 +63,7 @@ void testZuendungstaster_State2TransitionTo3()
 	GpioDataRegs.GPADAT.bit.GPIO9 = 0;
 	zuendungstaster();
 	
-	TEST_ASSERT_EQUAL(3, zuendung);
+	TEST_ASSERT_EQUAL(30, zuendung);
 }
 
 void testZuendungstaster_State3TransitionTo4()
@@ -72,7 +72,7 @@ void testZuendungstaster_State3TransitionTo4()
 	GpioDataRegs.GPADAT.bit.GPIO9 = 1;
 	zuendungstaster();
 	
-	TEST_ASSERT_EQUAL(4, zuendung);
+	TEST_ASSERT_EQUAL(40, zuendung);
 }
 
 void testZuendungstaster_State4TransitionTo1()
