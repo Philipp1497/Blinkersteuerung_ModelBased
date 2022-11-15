@@ -17,10 +17,7 @@ pipeline {
 		stage ('run ceedling tests') {
 			steps{
 				bat """
-					ceedling gcov:all utils:gcov > Tools\\ReqCoverage\\log.txt
-					IF %ERRORLEVEL% NEQ 0 ( 
-					   exit 0
-					)
+					ceedling gcov:all utils:gcov >> Tools\\ReqCoverage\\log.txt 2>&1
 				"""
 			}
 		}
