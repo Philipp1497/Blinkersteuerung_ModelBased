@@ -35,7 +35,7 @@ void testZuendungstaster_whenZuendungWasNotActive()
 	GpioDataRegs.GPADAT.bit.GPIO9 = 0;
 	zuendungstaster();
 	
-	TEST_ASSERT_EQUAL(1, zuendung_aktiv);
+	TEST_ASSERT_EQUAL(0, zuendung_aktiv);
 }
 
 void testZuendungstaster_whenZuendungWasActive()
@@ -45,7 +45,7 @@ void testZuendungstaster_whenZuendungWasActive()
 	GpioDataRegs.GPADAT.bit.GPIO9 = 0;
 	zuendungstaster();
 	
-	TEST_ASSERT_EQUAL(0, zuendung_aktiv);
+	TEST_ASSERT_EQUAL(1, zuendung_aktiv);
 }
 
 void testZuendungstaster_State1TransitionTo2()
