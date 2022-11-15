@@ -16,7 +16,10 @@ pipeline {
         }
 		stage ('run ceedling tests') {
 			steps{
-				bat "startCeedling.bat"
+				status = bat "startCeedling.bat"
+				if (status === "MARK-AS-UNSTABLE") {
+					currentBuild.result = "UNSTABLE"
+				}
 			}
 		}
 		stage ('run static code analysis'){
