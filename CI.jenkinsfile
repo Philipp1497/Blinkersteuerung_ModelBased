@@ -17,7 +17,7 @@ pipeline {
 		stage ('run ceedling tests') {
 			steps{
 				bat """
-					ceedling gcov:all utils:gcov > Tools\\ReqCoverage\\log.txt
+					ceedling gcov:all utils:gcov > Tools\\ReqCoverage\\log.txt 2>NUL
 				"""
 			}
 		}
