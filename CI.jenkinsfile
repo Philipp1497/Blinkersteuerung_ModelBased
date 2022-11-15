@@ -16,8 +16,8 @@ pipeline {
         }
 		stage ('run ceedling tests') {
 			steps{
-				bat "status = startCeedling.bat"
-				if (status === 1) {
+				status = startCeedling.bat
+				if (status === "1") {
 					currentBuild.result = "UNSTABLE"
 				}
 			}
