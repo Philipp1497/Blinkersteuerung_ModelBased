@@ -18,6 +18,9 @@ pipeline {
 			steps{
 				bat """
 					ceedling gcov:all utils:gcov >> Tools\\ReqCoverage\\log.txt 2>&1
+					IF %ERRORLEVEL% EQ 1 (
+						EXIT /B 0
+					)
 				"""
 			}
 		}
