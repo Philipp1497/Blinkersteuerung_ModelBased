@@ -16,17 +16,9 @@ pipeline {
         }
 		stage ('run ceedling tests') {
 			steps{
-				script {
-                    try {
-                        bat """
-							ceedling gcov:all utils:gcov >> Tools\\ReqCoverage\\log.txt 2>&1
-						"""
-                    }
-                    catch (exc) {
-                        echo 'Testing failed!'
-                        currentBuild.result = 'UNSTABLE'
-                    }
-                }
+				bat """
+					ceedling gcov:all utils:gcov > Tools\\ReqCoverage\\log.txt 2>NUL
+				"""
 			}
 		}
 		stage ('run static code analysis'){
@@ -53,6 +45,7 @@ pipeline {
             steps{
                 archiveArtifacts artifacts: 'Target\\bin\\*.*', onlyIfSuccessful: true
 				archiveArtifacts artifacts: 'Tools\\splint\\log.txt', onlyIfSuccessful: true
+				archiveArtifacts artifacts: 'build\\artifacts\\gcov\\*.*', onlyIfSuccessful: true
             }
         }
 		stage ('results'){

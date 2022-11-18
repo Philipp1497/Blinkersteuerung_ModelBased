@@ -96,7 +96,6 @@ int AppMain(void)
 {
    /* Initialize model */
   Blinkersteuerung_initialize();
-	aabbaa
   /* Attach rt_OneStep to a timer or interrupt service routine with
    * period 0.2 seconds (base rate of the model) here.
    * The call syntax for rt_OneStep is

@@ -18,7 +18,6 @@
  *    2. RAM efficiency
  * Validation result: Not run
  */
-aaa
 #include "Blinkersteuerung.h"
 #include "Taster.h"
 #include "rtwtypes.h"
