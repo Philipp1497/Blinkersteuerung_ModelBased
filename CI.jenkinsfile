@@ -27,9 +27,6 @@ pipeline {
                         currentBuild.result = 'UNSTABLE'
                     }
                 }
-				bat """
-					ceedling gcov:all utils:gcov > Tools\\ReqCoverage\\log.txt 2>NUL
-				"""
 			}
 		}
 		stage ('run static code analysis'){
