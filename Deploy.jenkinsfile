@@ -12,6 +12,7 @@ pipeline {
                 bat """
 					xcopy "Target\\copiedArtifacts\\Target\\bin\\*.map" "Tools\\memory\\mapfiles"
                     cd Tools\\memory
+					del output\\output.txt 2>NUL
 					%PYTHON% main.py
                 """
 				archiveArtifacts artifacts: 'Tools\\memory\\output\\output.txt', onlyIfSuccessful: true
